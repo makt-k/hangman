@@ -24,7 +24,11 @@
 ## Future developments
 * Bundle and serve 3rd party libraries as ```vendor.js``` instead of using CDN
 * Host game on AWS to scale to traffic
-* Additional refactoring and code reorganization (separate out services, for instance) can be done as the app scales
+* Additional refactoring and code reorganization (separate out services, for instance) can be done as the app gets more complex
+
+## Caveat
+* Since I did not have to transpile to ES5 to run the game locally, I kept it simple and did not utilize Babel. But if I have to support older browsers, I will bring in Webpack to transform, bundle, and package the code.
+* Reference: http://caniuse.com/#search=ES6
 
 ## Installation
 * Clone repo and run ```npm install```, then ```npm run start```

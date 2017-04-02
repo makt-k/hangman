@@ -18,7 +18,7 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         startGame();
     }
 
-    // refactor to a separate service as app scales
+    // refactor to a separate service if the app gets more complex
     function submitGuess(userInput) {
         const guess = $resource('/validateGuess');
 
@@ -53,7 +53,7 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         $rootScope.gamesLost++
     }
 
-    // refactor to a separate service as app scales
+    // refactor to a separate service if the app gets more complex
     function startGame() {
         const gameInit = $resource('/initGame');
 
