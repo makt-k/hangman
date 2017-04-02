@@ -4,7 +4,6 @@
   "description": "simple hangman game",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./node_modules",
     "start": "./node_modules/.bin/nodemon app.js"
   },

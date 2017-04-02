@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 app.use(routes.initGame);
 app.use(routes.validateGuess);
 
-
 module.exports = app;
 
 const port = process.env.PORT || 4000;
