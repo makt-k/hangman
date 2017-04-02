@@ -1,15 +1,20 @@
 var app = angular.module('Hangman', ['ngResource', 'angular.filter']);
 
 app.controller('AppController', function($scope, $rootScope, $resource) {
-    // set initial state
-    const validPositions = [];
     const maxNumOfWrongGuesses = 10;
-    let numOfWrongGuesses = 0;
+    let numOfWrongGuesses;
 
+    $rootScope.gamesWon = 0;
+    $rootScope.gamesLost = 0;
+
+    // set initial state
     function init() {
         $scope.title = 'The Hallow Hangman with Node and Angular';
         $scope.gameOver = false;
         $scope.gameWon = false;
+        $scope.validPositions = [];
+        $scope.guessedLetters = [];
+        numOfWrongGuesses = 0;
         startGame();
     }
 
@@ -18,11 +23,10 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
 
         // send user's guess to the server for validation
         guess.save({ letter: userInput }, function(res) {
-            if(!res.validPositions.length) return drawHangman();
 
+            if(!res.validPositions.length) return drawHangman();
             // use the spread operator instead of .apply to update the validPositions array
-            validPositions.push(...res.validPositions);
-            $scope.validPositions = validPositions;
+            $scope.validPositions.push(...res.validPositions);
             if($scope.validPositions.length === $scope.lettersArray.length) return wonGame();
         });
     }
@@ -33,16 +37,19 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         $scope.imgSrc = `/img/${numOfWrongGuesses}.jpg`;
 
         // if maxed out incorrect guesses, end the game
-        if (numOfWrongGuesses === maxNumOfWrongGuesses) return endGame();
+        if (numOfWrongGuesses === maxNumOfWrongGuesses) return lostGame();
     }
 
     function wonGame() {
         $scope.gameWon = true;
         $scope.gameOver = true;
+        $rootScope.gamesWon++;
     }
 
-    function endGame() {
+    function lostGame() {
         $scope.gameOver = true;
+        $scope.gameWon = false;
+        $rootScope.gamesLost++
     }
 
     function startGame() {
@@ -58,15 +65,21 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
     }
 
     $scope.submitGuess = function(userInput) {
+        $scope.duplicateGuess = false;
+
+        // check for duplicate guesses
+        if ( $scope.guessedLetters.includes(userInput)) return $scope.duplicateGuess = true;
+        $scope.guessedLetters.push(userInput);
+
         submitGuess(userInput);
 
         // clear input field and reset error state
         $scope.guess = '';
-        $scope.guessForm.guess.$pristine = true;
+        $scope.guessForm.$setPristine();
     }
 
     $scope.restartGame = function(){
-        window.location.reload();
+        init();
     }
 
     init();

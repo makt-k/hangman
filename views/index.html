@@ -18,10 +18,7 @@
   </nav>
 
   <div class="row">
-    <div class="col-sm-12">
-      <div ng-if="gameWon" class="alert alert-success" role="alert">Nice! You won this round.</div>
-      <div ng-if="!gameWon && gameOver" class="alert alert-danger" role="alert">Better luck next time.</div>
-    </div>
+
     <div class="col-sm-6">
 
     <!-- start userInput -->
@@ -29,7 +26,8 @@
         <label>Enter your guess here at your own risk:</label>
         <div class="input-group" id="guessInput" ng-class="{ 'has-error': guessForm.guess.$invalid && !guessForm.guess.$pristine}">
           <input type="text" name="guess" class="form-control" size="1" maxlength="1" ng-model="guess"
-          ng-required="true" ng-Pattern="/^[a-zA-Z]*$/">
+          ng-required="true" ng-Pattern="/^[a-zA-Z]*$/"
+          ng-keyup="$event.keyCode == 13 && guessForm.$valid && submitGuess(guess)">
           <span class="input-group-btn">
             <button class="btn btn-default" type="button" ng-click="guessForm.$valid && submitGuess(guess)">Go!</button>
           </span>
@@ -56,15 +54,26 @@
         <div class="letterBox col-sm-2"> <span ng-if="validPositions | contains:$index" class="correctGuess">{{letter}}</span></div>
       </div>
       <!-- end correct letters & word display -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div ng-if="gameWon" class="alert alert-success" role="alert">Nice! You won this round.</div>
+          <div ng-if="!gameWon && gameOver" class="alert alert-danger" role="alert">Better luck next time.</div>
+          <div ng-if="duplicateGuess" class="alert alert-warning" role="alert">You have already used that letter in a guess.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="col-sm-6 hangman-diagram">
+    <div class="col-sm-3 hangman-diagram">
       <img src="{{imgSrc}}">
       <hr />
       <div>
         <button type="button" class="btn btn-warning" ng-if="gameOver" ng-click="restartGame()">Restart Game</button>
       </div>
+    </div>
 
+    <div class="col-sm-3 stats">
+      <h4>Games won: {{gamesWon}}</h4>
+      <h4>Games lost: {{gamesLost}}</h4>
     </div>
 
   </div>
