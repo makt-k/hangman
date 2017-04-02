@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // routes
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
+  res.sendFile(`${__dirname}/views/index.html`)
 });
 app.use(routes.initGame);
 app.use(routes.validateGuess);
