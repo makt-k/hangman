@@ -1,4 +1,4 @@
-var app = angular.module('Hangman', ['ngResource', 'angular.filter']);
+const app = angular.module('Hangman', ['ngResource', 'angular.filter']);
 
 app.controller('AppController', function($scope, $rootScope, $resource) {
     const maxNumOfWrongGuesses = 10;
@@ -23,7 +23,7 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         const guess = $resource('/validateGuess');
 
         // send user's guess to the server for validation
-        guess.save({ letter: userInput }, function(res) {
+        guess.save({ letter: userInput }, (res) => {
 
             if(!res.validPositions.length) return drawHangman();
             // use the spread operator instead of .apply to update the validPositions array
@@ -58,7 +58,7 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         const gameInit = $resource('/initGame');
 
         // get random word from server
-        gameInit.get({}, function(res) {
+        gameInit.get({}, (res) => {
            $scope.lettersArray = res.randomWord.split('');
         })
 
@@ -66,7 +66,7 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         $scope.imgSrc = '/img/0.jpg';
     }
 
-    $scope.submitGuess = function(userInput) {
+    $scope.submitGuess = (userInput) => {
         $scope.duplicateGuess = false;
 
         // check for duplicate guesses
@@ -80,7 +80,7 @@ app.controller('AppController', function($scope, $rootScope, $resource) {
         $scope.guessForm.$setPristine();
     }
 
-    $scope.restartGame = function(){
+    $scope.restartGame = () => {
         init();
     }
 
