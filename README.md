@@ -24,6 +24,7 @@
 ## Future developments
 * Bundle and serve 3rd party libraries as ```vendor.js``` instead of using CDN
 * Host game on AWS to scale to traffic
+* Additional refactoring and code reorganization (separate out services, for instance) can be done as the app scales
 
 ## Installation
 * Clone repo and run ```npm install```, then ```npm run start```
