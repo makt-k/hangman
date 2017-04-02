@@ -1,0 +1,19 @@
+.letterBox {
+  height: 40px;
+  width: 40px;
+  border: 1px solid black;
+  margin: 2px;
+}
+
+.correctGuess {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#guessInput {
+  width: 100px;
+}
+
+.error {
+  color: red;
+}
