@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const randomWords = require('random-words');
 
-router.get('/initGame', function(req, res) {
+router.get('/initGame', (req, res) => {
   // fetch new random word
   const randomWord = randomWords();
 

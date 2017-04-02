@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-router.post('/validateGuess', function(req, res) {
+router.post('/validateGuess', (req, res) => {
   const correctWord = req.app.word;
   const guessedLetter = req.body.letter;
   let validPositions = [];
