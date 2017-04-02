@@ -3,7 +3,7 @@
 
 
 ##Synopsis
-The intention of this project was to write a Hangman game as a Web application
+* The intention of this project was to write a Hangman game as a Web application
 
 ##Game Logic
 * When the game is started, the player is represented with an empty field for each letter in the word.
@@ -26,9 +26,9 @@ The intention of this project was to write a Hangman game as a Web application
 * Host game on AWS to scale to traffic
 
 ##Installation
-Clone repo and run ```npm install```, then ```npm run start```
+* Clone repo and run ```npm install```, then ```npm run start```
 
 ##Contributions
-The set of Hangman images are by [Marc Oliveras](http://oligalma.com) under the Creative Commons License
+* The set of Hangman images are by [Marc Oliveras](http://oligalma.com) under the Creative Commons License
 
 **This game is built with love from Boston by Karen Mak**
